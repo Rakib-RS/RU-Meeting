@@ -8,7 +8,13 @@ const createUser = (req,res)=>{
             username: body.username,
             password: body.password
         }
+        
         User.create(userData,(err,data)=>{
+            if(!data){
+                return res.json({
+                    error: "username or email already included"
+                })
+            }
             return res.json({
                 sucess: true,
                 data: data,
