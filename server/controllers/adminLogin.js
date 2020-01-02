@@ -1,20 +1,27 @@
-//authenticate input against database
-UserSchema.statics.authenticate = function (email, password, callback) {
-    User.findOne({ email: email })
-      .exec(function (err, user) {
-        if (err) {
-          return callback(err)
-        } else if (!user) {
-          var err = new Error('User not found.');
-          err.status = 401;
-          return callback(err);
-        }
-        bcrypt.compare(password, user.password, function (err, result) {
-          if (result === true) {
-            return callback(null, user);
-          } else {
-            return callback();
-          }
-        })
-      });
+'use strict'
+const bcrypt = require('bcryptjs')
+const User = require('../models/loginModel');
+const login = (req,res)=>{
+  
+  const serch = {
+    email: req.body.email
   }
+
+  User.findOne(serch,(err,user)=>{
+    bcrypt.compare(req.body.password, user.password,  (err, result)=>{
+        if(result==true){
+          res.json({
+            success: true
+          })
+        }else{
+          res.json({
+            success: false
+          })
+        } 
+    })
+  })
+}
+module.exports={
+  login,
+
+}
