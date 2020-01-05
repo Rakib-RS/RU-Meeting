@@ -1,0 +1,24 @@
+{
+  "name": "RU-Meeting",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd server && npm start",
+    "build": "cd client/ && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rakib-RS/RU-Meeting.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rakib-RS/RU-Meeting/issues"
+  },
+  "homepage": "https://github.com/Rakib-RS/RU-Meeting#readme",
+  "dependencies": {
+    "concurrently": "^5.0.2"
+  }
+}
