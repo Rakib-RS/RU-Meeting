@@ -11,6 +11,10 @@
     "type": "git",
     "url": "git+https://github.com/Rakib-RS/RU-Meeting.git"
   },
+  "cacheDirectories": [
+    "server/node_modules",
+    "client/node_modules"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
