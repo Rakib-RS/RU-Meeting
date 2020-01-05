@@ -36,7 +36,10 @@ import api from '../api/adminApi';
         const {firstName,lastName,email,username,password} = this.state;
         const payload = {firstName,lastName,email,username,password};
         await api.signup(payload).then((res)=>{
-            window.alert('Signup Succesfully');
+            console.log(res);
+            if(res.data.success===false)
+            window.alert('Sign up failed');
+            //else if(!res) window.alert("sign up success");
             this.setState({
                 firstName: '',
                 lastName: '',
@@ -54,7 +57,7 @@ import api from '../api/adminApi';
 
                 <div className="form-group">
                     <label>First name</label>
-                    <input type="text" className="form-control" placeholder="First name" value={firstName} 
+                    <input type="text" required className="form-control" placeholder="First name" value={firstName} 
                         onChange = {this.handleChangeFirstName}
                     />
                 </div>
@@ -68,20 +71,20 @@ import api from '../api/adminApi';
 
                 <div className="form-group">
                     <label>Email address</label>
-                    <input type="email" className="form-control" placeholder="Enter email" value={email} 
+                    <input type="email" required className="form-control" placeholder="Enter email" value={email} 
                         onChange = {this.handleChangeEmail}
                     />
                 </div>
                 <div className="form-group">
                     <label>User Name</label>
-                    <input type="text" className="form-control" placeholder="Enter UserName" value={username} 
+                    <input type="text" required className="form-control" placeholder="Enter UserName" value={username} 
                         onChange = {this.handleChangeUserName}
                     />
                 </div>
 
                 <div className="form-group">
                     <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" value={password} 
+                    <input type="password" required className="form-control" placeholder="Enter password" value={password} 
                         onChange = {this.handleChangePassword}
                     />
                 </div>
@@ -90,7 +93,7 @@ import api from '../api/adminApi';
                     Sign Up
                 </button>
                 <p className="forgot-password text-right">
-                    Already registered <a href="#">sign in?</a>
+                    Already registered <a href="/sign-in">sign in?</a>
                 </p>
             </form>
         );
