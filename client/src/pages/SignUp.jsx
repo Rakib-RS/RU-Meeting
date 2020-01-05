@@ -47,6 +47,7 @@ import api from '../api/adminApi';
         })
     }
     render() {
+        const {firstName,lastName,email,username,password} = this.state;
         return (
             <form>
                 <h3>Sign Up</h3>
@@ -95,3 +96,4 @@ import api from '../api/adminApi';
         );
     }
 }
+export default SignUp
