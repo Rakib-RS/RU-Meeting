@@ -9,14 +9,21 @@ const login = (req,res)=>{
   }
 
   User.findOne(serch,(err,user)=>{
+    //console.log(user);
+    
+    if (err || !user) {
+      return res.json({
+        data: "email is not exist"
+      })
+    }
     bcrypt.compare(req.body.password, user.password,  (err, result)=>{
         if(result==true){
-          res.json({
-            success: true
+         return res.json({
+            data: true
           })
         }else{
-          res.json({
-            success: false
+          return res.json({
+            data: "password is incorrect"
           })
         } 
     })
