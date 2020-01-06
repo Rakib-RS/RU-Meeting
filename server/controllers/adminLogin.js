@@ -2,6 +2,7 @@
 const bcrypt = require('bcryptjs')
 const User = require('../models/loginModel');
 const login = (req,res)=>{
+  console.log(req.body);
   
   const serch = {
     email: req.body.email
