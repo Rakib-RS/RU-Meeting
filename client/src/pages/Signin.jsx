@@ -21,7 +21,15 @@ class Signin extends Component {
         const {email,password} = this.state;
         const payload = {email,password};
         await apis.signin(payload).then((res)=>{
-            window.location.href ="/home"
+            //console.log(res);
+            const status = res.data.data;
+            console.log(status);
+            console.log(res);
+            if(status!==true){
+              return  window.alert(status);
+            }
+            
+            window.location.href="/home"
         })
     }     
 
