@@ -25,11 +25,15 @@ class Signin extends Component {
             const status = res.data.data;
             console.log(status);
             console.log(res);
+            //window.alert("ok2");
             if(status!==true){
-              return  window.alert(status);
+                window.alert(status);
+            }
+            else {
+                window.alert("ok");
             }
             
-            window.location.href="/home"
+            //window.location.href="/home"
         })
     }     
 
