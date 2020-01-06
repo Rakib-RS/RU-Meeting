@@ -4,8 +4,8 @@ import React from 'react';
 //import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import {signup} from '../pages/index';
-import Login from '../components/login.component'
+import {signup,signin} from '../pages/index';
+//import Login from '../components/login.component'
 
 
 function App() {
@@ -30,8 +30,8 @@ function App() {
       <div className="auth-wrapper">
         <div className="auth-inner">
         <Switch>
-            <Route exact path='/' component={Login} />
-            <Route path="/sign-in" exact component={Login} />
+            <Route  path='/' exact component={signin} />
+            <Route path="/sign-in" exact component={signin} />
             <Route path="/sign-up" exact component={signup} />
           </Switch>
         </div>
