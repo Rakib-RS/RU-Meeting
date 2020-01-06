@@ -9,6 +9,7 @@ import api from '../api/adminApi';
             email: '',
             username: '',
             password: '',
+            confirmPassword : '',
 
         }
     }
@@ -32,10 +33,15 @@ import api from '../api/adminApi';
         const password = event.target.value;
         this.setState({password})
     }
+    handleChangeConfirmPassword = async(event)=>{
+        const confirmPassword = event.target.value;
+        this.setState({confirmPassword})
+    }
     handleIncludeAdmin = async() =>{
-        const {firstName,lastName,email,username,password} = this.state;
-        const payload = {firstName,lastName,email,username,password};
-        await api.signup(payload).then((res)=>{
+        const {firstName,lastName,email,username,password,confirmPassword} = this.state;
+        if (password===confirmPassword) {
+            const payload = {firstName,lastName,email,username,password};
+            await api.signup(payload).then((res)=>{
             console.log(res);
             if(res.data.success===false)
             window.alert('Sign up failed');
@@ -46,8 +52,10 @@ import api from '../api/adminApi';
                 email: '',
                 username: '',
                 password: '',
+                })
             })
-        })
+        }
+        
     }
     render() {
         const {firstName,lastName,email,username,password} = this.state;
@@ -87,6 +95,13 @@ import api from '../api/adminApi';
                     <input type="password" required className="form-control" placeholder="Enter password" value={password} 
                         onChange = {this.handleChangePassword}
                     />
+                </div>
+
+                <div className="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" required className="form-control" placeholder="confirm password" value={password}
+                        onChange = {this.handleChangeConfirmPassword}
+                    ></input>
                 </div>
 
                 <button type="submit" className="btn btn-primary btn-block" onClick={this.handleIncludeAdmin}>
