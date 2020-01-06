@@ -1,10 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+//import './App.css';
+//import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import SignUp from "./components/signup.component";
-import Login from './components/login.component'
+import {signup} from '../pages/index';
+import Login from '../components/login.component'
 
 
 function App() {
@@ -30,8 +31,8 @@ function App() {
         <div className="auth-inner">
         <Switch>
             <Route exact path='/' component={Login} />
-            <Route path="/sign-in" component={Login} />
-            <Route path="/sign-up" component={SignUp} />
+            <Route path="/sign-in" exact component={Login} />
+            <Route path="/sign-up" exact component={signup} />
           </Switch>
         </div>
       </div>
