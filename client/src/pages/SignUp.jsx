@@ -37,7 +37,7 @@ import api from '../api/adminApi';
         const payload = {firstName,lastName,email,username,password};
         await api.signup(payload).then((res)=>{
             console.log(res);
-            if(res.data.success===false)
+           
             window.alert('Sign up failed');
             //else if(!res) window.alert("sign up success");
             this.setState({
@@ -47,6 +47,7 @@ import api from '../api/adminApi';
                 username: '',
                 password: '',
             })
+            window.location.href = "/sign-in"
         })
     }
     render() {
