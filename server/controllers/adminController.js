@@ -15,19 +15,25 @@ const createUser = (req,res)=>{
             firstName: body.firstName,
             lastName: body.lastName,
         }
-        
-        User.create(userData,(err,data)=>{
-            if(!data){
+        const user = new User(userData);
+        if(!user){
+            return res.json({
+                success: false
+            })
+        }
+        user.save()
+            .then(()=>{
                 return res.json({
-                    error: "username or email already included",
+                    data: userData,
+                    success: true
+                })
+            })
+            .catch((error)=>{
+                return res.json({
+                    error,
                     success: false
                 })
-            }
-            return res.json({
-                success: true,
-                data: data,
             })
-        })
     }
     else 
     return res.json({
