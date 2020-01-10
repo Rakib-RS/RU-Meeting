@@ -1,5 +1,7 @@
 'use strict'
 const User = require('../models/loginModel');
+const ValidateRegisterInput = require('../validator/register');
+const keys = require('../config/keys');
 const createUser = (req,res)=>{
     const body = req.body;
     if(body.email && body.username && body.password && body.firstName && body.lastName){
@@ -14,6 +16,10 @@ const createUser = (req,res)=>{
             password: body.password,
             firstName: body.firstName,
             lastName: body.lastName,
+        }
+        const {errors, isValid} = ValidateRegisterInput(body);
+        if(!isValid){
+            return res.status(400).json(errors);
         }
         const user = new User(userData);
         if(!user){
