@@ -7,6 +7,7 @@ class Signin extends Component {
         this.state = {
             email: '',
             password: '',
+            errors: {},
         }
     }
     handleChangeEmail = async (event)=>{
@@ -17,9 +18,11 @@ class Signin extends Component {
         const password = event.target.value;
         this.setState({password});
     }
-    handleSignin = async ()=>{
+    handleSignin = async (event)=>{
+        event.preventDefault()
         const {email,password} = this.state;
         const payload = {email,password};
+        
         await apis.signin(payload).then((res)=>{
             //console.log(res);
             const status = res.data.data;
@@ -34,7 +37,7 @@ class Signin extends Component {
     }     
 
     render() {
-        const {email,password} = this.state;
+        const {email,password,errors} = this.state;
         return (
             <form>
                 <h3>Sign In</h3>
@@ -43,6 +46,7 @@ class Signin extends Component {
                     <label>Email address</label>
                     <input type="email" className="form-control" placeholder="Enter email" required value={email}
                         onChange = {this.handleChangeEmail}
+                        error = {errors.email}
                     />
                 </div>
 
@@ -50,6 +54,7 @@ class Signin extends Component {
                     <label>Password</label>
                     <input type="password" className="form-control" placeholder="Enter password" 
                         required value= {password} onChange = {this.handleChangePassword}
+                        error = {errors.password}
                     />
                 </div>
 

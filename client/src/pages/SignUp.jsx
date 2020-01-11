@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import api from '../api/adminApi';
+
  class SignUp extends Component {
     constructor(props){
         super(props)
@@ -10,6 +11,7 @@ import api from '../api/adminApi';
             username: '',
             password: '',
             confirmPassword : '',
+            errors: {},
 
         }
     }
@@ -37,7 +39,8 @@ import api from '../api/adminApi';
         const confirmPassword = event.target.value;
         this.setState({confirmPassword})
     }
-    handleIncludeAdmin = async() =>{
+    handleIncludeAdmin = async(event) =>{
+        event.preventDefault();
         const {firstName,lastName,email,username,password,confirmPassword} = this.state;
         if (password===confirmPassword) {
             const payload = {firstName,lastName,email,username,password};
@@ -58,7 +61,7 @@ import api from '../api/adminApi';
         
     }
     render() {
-        const {firstName,lastName,email,username,password} = this.state;
+        const {firstName,lastName,email,username,password,confirmPassword,errors} = this.state;
         return (
             <form>
                 <h3>Sign Up</h3>
@@ -67,6 +70,7 @@ import api from '../api/adminApi';
                     <label>First name</label>
                     <input type="text" required className="form-control" placeholder="First name" value={firstName} 
                         onChange = {this.handleChangeFirstName}
+                        error={errors.firstName}
                     />
                 </div>
 
@@ -81,6 +85,7 @@ import api from '../api/adminApi';
                     <label>Email address</label>
                     <input type="email" required className="form-control" placeholder="Enter email" value={email} 
                         onChange = {this.handleChangeEmail}
+                        error = {errors.email}
                     />
                 </div>
                 <div className="form-group">
@@ -94,12 +99,13 @@ import api from '../api/adminApi';
                     <label>Password</label>
                     <input type="password" required className="form-control" placeholder="Enter password" value={password} 
                         onChange = {this.handleChangePassword}
+                        error = {errors.password}
                     />
                 </div>
 
                 <div className="form-group">
                     <label>Confirm Password</label>
-                    <input type="password" required className="form-control" placeholder="confirm password" value={password}
+                    <input type="password" required className="form-control" placeholder="confirm password" value={confirmPassword}
                         onChange = {this.handleChangeConfirmPassword}
                     ></input>
                 </div>
